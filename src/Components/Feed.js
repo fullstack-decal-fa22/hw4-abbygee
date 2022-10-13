@@ -1,20 +1,27 @@
 import { useState } from 'react';
 import React from 'react';
-import Menu from './Menu';
+
 import Block from './Block';
+import Menu from './Menu';
 
 const Feed = () => {
-    /* TODO: Declare a new state variable to keep track of the blocks on your Blockstagram feed! */
-    // Refer to Hint 2 for more help!
+    /* useState (Lesson 4) */
+    const [listOfBlocks, setListOfBlocks] = useState([]);
 
-    /* Use the map() function to render multiple Blocks! */
-    const posts = null; // TODO: edit this variable
+    /* Map function with components (Lesson 5) */
+    // STAFF TODO: note the unique key when mapping, bad to use indexes as keys, better practice?
+    const posts = listOfBlocks.map((color, i) => 
+        <Block key={i} color={color} caption={color}></Block>
+    );
+
+    const handleClick = (color) => {
+        setListOfBlocks(posts => [color, ...posts]);
+    }
 
     return (
         <div>
-            <Menu></Menu>
+            <Menu handleClick={handleClick}></Menu>
 
-            {/* Below is where all of your Blocks should render! */}
             {posts}
         </div>
     );
